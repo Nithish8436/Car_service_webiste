@@ -193,7 +193,12 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong. Please try again.' });
 });
 
-// ─── Start Server ──────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`Siva Auto Garage server running on port ${PORT}`);
-});
+// ─── Start Server (Only when not imported as a module) ──────────────────────
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Siva Auto Garage server running on port ${PORT}`);
+  });
+}
+
+// ─── Export for Vercel ────────────────────────────────────────────────────────
+module.exports = app;
