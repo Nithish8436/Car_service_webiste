@@ -6,10 +6,10 @@ export default function Hero() {
           <h1 className="text-6xl md:text-8xl xl:text-9xl font-black uppercase tracking-tighter leading-[0.85] mb-8">
             Expert <br />
             <span className="text-primary">Car Repair</span> <br />
-            & Services
+            & Services in Madurai
           </h1>
           <p className="text-xl md:text-2xl text-on-surface/60 font-light mb-12 max-w-xl leading-relaxed">
-            Professional auto care and repair perfectly suited for your car. Quality service you can trust.
+            Professional auto care and repair in Goripalayam, Madurai. Quality service you can trust for all car makes and models.
           </p>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <a href="#book" className="bg-primary text-on-primary px-10 py-5 font-bold uppercase tracking-widest text-base active-press hover:bg-surface hover:text-on-surface transition-precison">
@@ -17,7 +17,7 @@ export default function Hero() {
             </a>
             <div className="flex items-center gap-4 px-6 py-5 border border-outline/20">
               <span className="material-symbols-outlined text-primary text-xl">verified_user</span>
-              <span className="text-sm uppercase font-bold tracking-[0.2em] opacity-60">Trusted Garage</span>
+              <span className="text-sm uppercase font-bold tracking-[0.2em] opacity-60">Trusted Madurai Garage</span>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@ export default function Hero() {
           <div className="relative overflow-hidden aspect-[4/5] bg-on-surface">
             <img 
               className="w-full h-full object-cover grayscale brightness-90 group-hover:scale-105 group-hover:brightness-100 transition-precison duration-1000" 
-              alt="high-end mechanical tools" 
+              alt="Experienced mechanic working on a car engine at Siva Auto Garage Madurai" 
               src="/images/hero-bg.jpg" 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-on-surface/60 to-transparent"></div>

@@ -14,45 +14,45 @@ export default function Services() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-4 gap-px bg-surface/10 border border-surface/10">
           {/* Service Card 1 */}
-          <div className="md:col-span-6 lg:col-span-1 p-12 bg-on-surface hover:bg-zinc-900 transition-precison group relative overflow-hidden">
+          <article className="md:col-span-6 lg:col-span-1 p-12 bg-on-surface hover:bg-zinc-900 transition-precison group relative overflow-hidden">
             <div className="relative z-10">
               <span className="material-symbols-outlined text-3xl mb-12 text-primary group-hover:scale-110 transition-precison inline-block">settings_input_component</span>
-              <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">Engine Repair</h3>
-              <p className="opacity-50 text-base leading-relaxed mb-12">Complete diagnostics and repair for all diesel and petrol engines.</p>
+              <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">Engine Repair Madurai</h3>
+              <p className="opacity-50 text-base leading-relaxed mb-12">Complete diagnostics and repair for all diesel and petrol engines by expert mechanics.</p>
               <span className="text-sm uppercase font-bold tracking-widest opacity-30 group-hover:opacity-100 transition-precison block mt-auto">Service: 01</span>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
-          </div>
+          </article>
           {/* Service Card 2 */}
-          <div className="md:col-span-6 lg:col-span-1 p-12 bg-on-surface hover:bg-zinc-900 transition-precison group relative overflow-hidden">
+          <article className="md:col-span-6 lg:col-span-1 p-12 bg-on-surface hover:bg-zinc-900 transition-precison group relative overflow-hidden">
             <div className="relative z-10">
               <span className="material-symbols-outlined text-3xl mb-12 text-primary group-hover:scale-110 transition-precison inline-block">oil_barrel</span>
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">Oil & Filters</h3>
-              <p className="opacity-50 text-base leading-relaxed mb-12">Premium synthetic oil changes and high-quality filter replacements.</p>
+              <p className="opacity-50 text-base leading-relaxed mb-12">Premium synthetic oil changes and high-quality filter replacements for engine longevity.</p>
               <span className="text-sm uppercase font-bold tracking-widest opacity-30 group-hover:opacity-100 transition-precison block mt-auto">Service: 02</span>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
-          </div>
+          </article>
           {/* Service Card 3 */}
-          <div className="md:col-span-6 lg:col-span-1 p-12 bg-on-surface hover:bg-zinc-900 transition-precison group relative overflow-hidden">
+          <article className="md:col-span-6 lg:col-span-1 p-12 bg-on-surface hover:bg-zinc-900 transition-precison group relative overflow-hidden">
             <div className="relative z-10">
               <span className="material-symbols-outlined text-3xl mb-12 text-primary group-hover:scale-110 transition-precison inline-block">minor_crash</span>
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">Brakes & Shocks</h3>
-              <p className="opacity-50 text-base leading-relaxed mb-12">Brake pad replacement and suspension tuning for a smooth and safe ride.</p>
+              <p className="opacity-50 text-base leading-relaxed mb-12">Brake pad replacement and suspension tuning for a smooth and safe ride in Madurai traffic.</p>
               <span className="text-sm uppercase font-bold tracking-widest opacity-30 group-hover:opacity-100 transition-precison block mt-auto">Service: 03</span>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
-          </div>
+          </article>
           {/* Service Card 4 */}
-          <div className="md:col-span-6 lg:col-span-1 p-12 bg-on-surface hover:bg-zinc-900 transition-precison group relative overflow-hidden">
+          <article className="md:col-span-6 lg:col-span-1 p-12 bg-on-surface hover:bg-zinc-900 transition-precison group relative overflow-hidden">
             <div className="relative z-10">
               <span className="material-symbols-outlined text-3xl mb-12 text-primary group-hover:scale-110 transition-precison inline-block">battery_charging_full</span>
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">Battery & Electrical</h3>
-              <p className="opacity-50 text-base leading-relaxed mb-12">Battery health checks, wiring repairs, and electrical component fixes.</p>
+              <p className="opacity-50 text-base leading-relaxed mb-12">Battery health checks, wiring repairs, and electrical component fixes for modern cars.</p>
               <span className="text-sm uppercase font-bold tracking-widest opacity-30 group-hover:opacity-100 transition-precison block mt-auto">Service: 04</span>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
-          </div>
+          </article>
           {/* Expanded Service Row */}
           <div className="md:col-span-12 p-8 md:p-12 bg-on-surface border-t border-surface/10 hover:bg-zinc-900 transition-precison group">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12">

@@ -7,8 +7,8 @@ export default function Contact() {
     // Initialize Leaflet map securely via the global window.L injected via CDN
     if (window.L && !mapRef.current) {
       const L = window.L;
-      // Goripalayam, Tamil Nadu coordinates from requested Maps link
-      const map = L.map('dispatch-map', { zoomControl: false, attributionControl: false }).setView([9.9330084, 78.1289869], 14);
+      // Goripalayam, Tamil Nadu coordinates from exact Google Maps link
+      const map = L.map('dispatch-map', { zoomControl: false, attributionControl: false }).setView([9.9283511, 78.12861], 16);
       
       // Using standard OpenStreetMap theme for optimal clarity
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -17,11 +17,11 @@ export default function Contact() {
       }).addTo(map);
 
       // Add a custom marker/circle matching the brand primary color
-      L.circle([9.9330084, 78.1289869], {
+      L.circle([9.9283511, 78.12861], {
         color: '#9c3f00',
         fillColor: '#9c3f00',
         fillOpacity: 0.15,
-        radius: 400
+        radius: 100
       }).addTo(map);
 
       // Add a proper pin marker at the exact location
@@ -31,7 +31,24 @@ export default function Contact() {
         iconSize: [48, 48],
         iconAnchor: [24, 48],
       });
-      L.marker([9.9330084, 78.1289869], { icon: pinIcon }).addTo(map);
+      L.marker([9.9283511, 78.12861], { icon: pinIcon }).addTo(map);
+
+      // Handle successful location discovery
+      map.on('locationfound', (e) => {
+        const radius = e.accuracy / 2;
+        L.marker(e.latlng, {
+          icon: L.divIcon({
+            html: `<div class="relative flex items-center justify-center">
+                    <div class="absolute w-6 h-6 bg-blue-500 rounded-full animate-ping opacity-50"></div>
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg"></div>
+                   </div>`,
+            className: 'bg-transparent border-0',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+          })
+        }).addTo(map);
+        L.circle(e.latlng, radius, { color: '#3b82f6', fillOpacity: 0.1, weight: 1 }).addTo(map);
+      });
 
       mapRef.current = map;
     }
@@ -44,6 +61,24 @@ export default function Contact() {
       }
     };
   }, []);
+
+  const handleResetView = () => {
+    if (mapRef.current) {
+      mapRef.current.setView([9.9283511, 78.12861], 16);
+    }
+  };
+
+  const handleZoomIn = () => {
+    if (mapRef.current) {
+      mapRef.current.zoomIn();
+    }
+  };
+
+  const handleZoomOut = () => {
+    if (mapRef.current) {
+      mapRef.current.zoomOut();
+    }
+  };
 
   return (
     <section className="pb-32 px-8 scroll-mt-24" id="contact">
@@ -74,15 +109,33 @@ export default function Contact() {
         </div>
         <div className="lg:col-span-7 bg-on-surface h-[650px] relative overflow-hidden">
           <div id="dispatch-map" className="w-full h-full z-0"></div>
-          {/* Scanner Effect Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-primary/10 opacity-20 pointer-events-none z-10 transition-all duration-1000"></div>
-          {/* HUD Elements */}
-          <div className="absolute bottom-10 right-10 flex flex-col items-end pointer-events-none opacity-40">
-            <div className="text-sm font-black uppercase tracking-widest mb-1 text-surface">Madurai, TN</div>
-            <div className="w-32 h-1 bg-surface/20 relative">
-              <div className="absolute left-0 top-0 h-full w-2/3 bg-primary"></div>
+          
+          {/* Custom Map Controls Layer — Positioned in Bottom Right */}
+          <div className="absolute bottom-6 right-6 flex flex-col items-center gap-2 z-20">
+            {/* Center on Garage Button */}
+            <button 
+              onClick={handleResetView}
+              className="w-12 h-12 bg-white text-zinc-900 rounded-lg shadow-xl flex items-center justify-center hover:bg-primary hover:text-white transition-all active-press border border-zinc-200"
+              title="Center on Garage"
+            >
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>location_searching</span>
+            </button>
+
+            {/* Zoom Controls */}
+            <div className="flex flex-col bg-white rounded-lg shadow-xl border border-zinc-200 overflow-hidden">
+              <button 
+                onClick={handleZoomIn}
+                className="w-12 h-12 flex items-center justify-center text-zinc-900 hover:bg-primary hover:text-white border-b border-zinc-100 transition-all font-bold text-xl"
+              >+</button>
+              <button 
+                onClick={handleZoomOut}
+                className="w-12 h-12 flex items-center justify-center text-zinc-900 hover:bg-primary hover:text-white transition-all font-bold text-xl"
+              >-</button>
             </div>
           </div>
+
+          {/* Scanner Effect Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-primary/10 opacity-20 pointer-events-none z-10 transition-all duration-1000"></div>
         </div>
       </div>
     </section>
