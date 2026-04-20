@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 export default function Contact() {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    // Initialize Leaflet map securely via the global window.L injected via CDN
-    if (window.L && !mapRef.current) {
-      const L = window.L;
+    // Initialize Leaflet map using local npm package
+    if (!mapRef.current) {
       // Goripalayam, Tamil Nadu coordinates from exact Google Maps link
       const map = L.map('dispatch-map', { zoomControl: false, attributionControl: false }).setView([9.9283511, 78.12861], 16);
       
@@ -32,23 +33,6 @@ export default function Contact() {
         iconAnchor: [24, 48],
       });
       L.marker([9.9283511, 78.12861], { icon: pinIcon }).addTo(map);
-
-      // Handle successful location discovery
-      map.on('locationfound', (e) => {
-        const radius = e.accuracy / 2;
-        L.marker(e.latlng, {
-          icon: L.divIcon({
-            html: `<div class="relative flex items-center justify-center">
-                    <div class="absolute w-6 h-6 bg-blue-500 rounded-full animate-ping opacity-50"></div>
-                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg"></div>
-                   </div>`,
-            className: 'bg-transparent border-0',
-            iconSize: [24, 24],
-            iconAnchor: [12, 12],
-          })
-        }).addTo(map);
-        L.circle(e.latlng, radius, { color: '#3b82f6', fillOpacity: 0.1, weight: 1 }).addTo(map);
-      });
 
       mapRef.current = map;
     }

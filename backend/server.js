@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
+const twilio = require('twilio');
 const Booking = require('./models/Booking');
 
 dotenv.config();
@@ -48,14 +49,11 @@ const bookingLimiter = rateLimit({
   message: { error: 'Too many requests. Please try again after 15 minutes.' }
 });
 
-// ─── Email Configuration (Nodemailer) ──────────────────────────────────────
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+// ─── SMS Configuration (Twilio) ───────────────────────────────────────────
+const twilioClient = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
 
 // ─── Database Connection ───────────────────────────────────────────────────
 mongoose
@@ -135,49 +133,23 @@ app.post('/api/bookings', bookingLimiter, bookingValidationRules, async (req, re
 
     await newBooking.save();
 
-    // 📩 Send Email Alert to Garage Owner
-    const mailOptions = {
-      from: `"Siva Garage Alerts" <${process.env.EMAIL_USER}>`,
-      to: process.env.NOTIFY_EMAIL,
-      subject: `🆕 ${needsPickup ? '🚚 PICKUP:' : 'Booking:'} ${customerIdentifier}`,
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #eee; padding: 20px;">
-          <h2 style="color: #9c3f00; border-bottom: 2px solid #9c3f00; padding-bottom: 10px;">
-            ${needsPickup ? '🚚 Pickup & Service Request' : 'New Service Booking'}
-          </h2>
-          
-          <div style="margin-bottom: 20px;">
-            <p><strong>Customer:</strong> ${customerIdentifier}</p>
-            <p><strong>Contact:</strong> <a href="tel:${commLink}">${commLink}</a></p>
-            <p><strong>Vehicle:</strong> ${machineSpecs}</p>
-            <p><strong>Service Type:</strong> ${serviceClass}</p>
-            <p><strong>Date:</strong> ${new Date(executionDate).toLocaleDateString()}</p>
-          </div>
+    // 📱 Send SMS Alert to Garage Owner
+    const smsBody = `🆕 ${needsPickup ? '🚚 PICKUP' : 'BOOKING'}\n` +
+                    `Customer: ${customerIdentifier}\n` +
+                    `Phone: ${commLink}\n` +
+                    `Vehicle: ${machineSpecs}\n` +
+                    `Service: ${serviceClass}\n` +
+                    `Date: ${new Date(executionDate).toLocaleDateString()}\n` +
+                    (needsPickup ? `Address: ${pickupAddress}\n` : '') +
+                    `Desc: ${problemDescription || 'None'}`;
 
-          ${needsPickup ? `
-          <div style="background: #fff8f1; border: 1px solid #9c3f00; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-            <p style="margin: 0; font-weight: bold; color: #9c3f00;">🚚 PICKUP ADDRESS:</p>
-            <p style="margin: 10px 0 0 0; font-size: 16px;">${pickupAddress}</p>
-          </div>
-          ` : ''}
-
-          <div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
-            <p style="margin: 0; font-weight: bold; color: #555;">Problem Description:</p>
-            <p style="margin: 10px 0 0 0;">${problemDescription || 'No description provided.'}</p>
-          </div>
-          
-          <p style="margin-top: 30px; font-size: 12px; color: #999;">This is an automated alert from Siva Auto Garage website.</p>
-        </div>
-      `
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Email sending failed:', error);
-      } else {
-        console.log('Alert email sent:', info.response);
-      }
-    });
+    twilioClient.messages.create({
+      body: smsBody,
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: process.env.NOTIFY_PHONE || process.env.TWILIO_PHONE_NUMBER // Fallback to sender if receiver not set
+    })
+    .then(message => console.log('SMS alert sent:', message.sid))
+    .catch(error => console.error('SMS sending failed:', error));
 
     res.status(201).json({ message: 'Booking submitted successfully.' });
   } catch (error) {
