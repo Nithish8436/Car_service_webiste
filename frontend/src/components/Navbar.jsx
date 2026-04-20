@@ -92,13 +92,13 @@ export default function Navbar() {
           <span className="material-symbols-outlined mb-1 text-2xl">handyman</span>
           <span className="font-headline text-[10px] font-bold uppercase tracking-widest">DIAGNOSTICS</span>
         </a>
-        <a className={getBottomLinkClass('book')} href="#book">
-          <span className="material-symbols-outlined mb-1 text-2xl">menu_book</span>
-          <span className="font-headline text-[10px] font-bold uppercase tracking-widest">LOGBOOK</span>
-        </a>
         <a className={getBottomLinkClass('why-us')} href="#why-us">
           <span className="material-symbols-outlined mb-1 text-2xl">settings_input_component</span>
           <span className="font-headline text-[10px] font-bold uppercase tracking-widest">SPECS</span>
+        </a>
+        <a className={getBottomLinkClass('book')} href="#book">
+          <span className="material-symbols-outlined mb-1 text-2xl">menu_book</span>
+          <span className="font-headline text-[10px] font-bold uppercase tracking-widest">LOGBOOK</span>
         </a>
       </nav>
     </>
