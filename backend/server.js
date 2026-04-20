@@ -26,8 +26,10 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (e.g. mobile apps, curl) or from allowed origins
-    if (!origin || allowedOrigins.includes(origin)) {
+    // Allows absolute matches OR any Vercel preview domain from your account
+    const isVercelPreview = origin && origin.includes('car-service-webiste') && origin.includes('vercel.app');
+    
+    if (!origin || allowedOrigins.includes(origin) || isVercelPreview) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
