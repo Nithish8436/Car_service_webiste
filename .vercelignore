@@ -1,12 +1,7 @@
 node_modules
-frontend
-backend
 .git
 .github
 *.sh
 .env
 .env.*
-!public
-!api
-!vercel.json
-!package.json
+# Do NOT ignore frontend/backend as we need them for building!
