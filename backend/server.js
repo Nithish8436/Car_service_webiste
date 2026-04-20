@@ -56,10 +56,20 @@ const twilioClient = twilio(
 );
 
 // ─── Database Connection ───────────────────────────────────────────────────
+const dbUri = process.env.MONGODB_URI;
+if (!dbUri) {
+  console.warn('⚠️ MONGODB_URI not found in environment variables. Falling back to local...');
+}
+
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/machinist_precision')
-  .then(() => console.log('MongoDB connected successfully'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .connect(dbUri || 'mongodb://localhost:27017/machinist_precision')
+  .then(() => {
+    const connectionTarget = dbUri ? 'MongoDB Atlas' : 'local database';
+    console.log(`Connected successfully to ${connectionTarget}`);
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error details:', err.message);
+  });
 
 // ─── Input Validation Rules ────────────────────────────────────────────────
 const bookingValidationRules = [
