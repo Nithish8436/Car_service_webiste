@@ -101,6 +101,10 @@ const bookingValidationRules = [
 ];
 
 // ─── Routes ────────────────────────────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.send('Siva Auto Garage API is running...');
+});
+
 app.post('/api/bookings', bookingLimiter, bookingValidationRules, async (req, res) => {
   // Check validation result
   const errors = validationResult(req);
