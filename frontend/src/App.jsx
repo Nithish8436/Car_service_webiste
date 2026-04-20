@@ -22,7 +22,7 @@ function App() {
       <Testimonials />
       <Contact />
       <Footer />
-      <Analytics />
+      {/* <Analytics /> */}
     </div>
   );
 }
