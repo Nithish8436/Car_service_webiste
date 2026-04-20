@@ -29,7 +29,11 @@ export default function Booking() {
     }
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_URL || '';
+      let apiBaseUrl = import.meta.env.VITE_API_URL || '';
+      // Fail-safe: Ensure URL starts with http to prevent relative path mapping
+      if (apiBaseUrl && !apiBaseUrl.startsWith('http')) {
+        apiBaseUrl = `https://${apiBaseUrl}`;
+      }
       const response = await fetch(`${apiBaseUrl}/api/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
