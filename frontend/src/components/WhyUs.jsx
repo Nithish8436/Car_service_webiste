@@ -10,27 +10,27 @@ export default function WhyUs() {
               alt="precise mechanical workshop" 
               src="/images/why-us-bg.jpg" 
             />
-            <div className="absolute inset-0 p-16 grid grid-cols-2 gap-px bg-on-surface/50">
-              <div className="p-8 border border-primary/20 flex flex-col justify-center">
-                <div className="text-primary text-5xl font-black mb-2 font-headline">25<span className="text-xl">+</span></div>
-                <div className="text-surface/40 text-sm font-bold uppercase tracking-[0.2em]">Years Experience</div>
+            <div className="absolute inset-0 p-4 sm:p-16 grid grid-cols-2 gap-px bg-on-surface/50">
+              <div className="p-4 sm:p-8 border border-primary/20 flex flex-col justify-center text-center sm:text-left">
+                <div className="text-primary text-3xl sm:text-5xl font-black mb-1 sm:mb-2 font-headline leading-none">25<span className="text-lg sm:text-xl">+</span></div>
+                <div className="text-surface/40 text-[10px] sm:text-sm font-bold uppercase tracking-[0.2em] leading-tight">Years Experience</div>
               </div>
-              <div className="p-8 border border-primary/20 flex flex-col justify-center">
-                <div className="text-primary text-5xl font-black mb-2 font-headline">9.8<span className="text-xl">K</span></div>
-                <div className="text-surface/40 text-sm font-bold uppercase tracking-[0.2em]">Happy Customers</div>
+              <div className="p-4 sm:p-8 border border-primary/20 flex flex-col justify-center text-center sm:text-left">
+                <div className="text-primary text-3xl sm:text-5xl font-black mb-1 sm:mb-2 font-headline leading-none">9.8<span className="text-lg sm:text-xl">K</span></div>
+                <div className="text-surface/40 text-[10px] sm:text-sm font-bold uppercase tracking-[0.2em] leading-tight">Happy Customers</div>
               </div>
-              <div className="p-8 border border-primary/20 flex flex-col justify-center">
-                <div className="text-primary text-5xl font-black mb-2 font-headline">100<span className="text-xl">%</span></div>
-                <div className="text-surface/40 text-sm font-bold uppercase tracking-[0.2em]">Genuine Spares</div>
+              <div className="p-4 sm:p-8 border border-primary/20 flex flex-col justify-center text-center sm:text-left">
+                <div className="text-primary text-3xl sm:text-5xl font-black mb-1 sm:mb-2 font-headline leading-none">100<span className="text-lg sm:text-xl">%</span></div>
+                <div className="text-surface/40 text-[10px] sm:text-sm font-bold uppercase tracking-[0.2em] leading-tight">Genuine Spares</div>
               </div>
-              <div className="p-8 border border-primary/20 flex flex-col justify-center">
-                <div className="text-primary text-5xl font-black mb-2 font-headline">24<span className="text-xl">H</span></div>
-                <div className="text-surface/40 text-sm font-bold uppercase tracking-[0.2em]">Fast Delivery</div>
+              <div className="p-4 sm:p-8 border border-primary/20 flex flex-col justify-center text-center sm:text-left">
+                <div className="text-primary text-3xl sm:text-5xl font-black mb-1 sm:mb-2 font-headline leading-none">24<span className="text-lg sm:text-xl">H</span></div>
+                <div className="text-surface/40 text-[10px] sm:text-sm font-bold uppercase tracking-[0.2em] leading-tight">Fast Delivery</div>
               </div>
             </div>
           </div>
           {/* Measurement Markings */}
-          <div className="absolute -left-10 top-0 h-full flex flex-col justify-between py-12">
+          <div className="hidden sm:flex absolute -left-10 top-0 h-full flex-col justify-between py-12">
             <div className="h-px w-6 bg-on-surface/20"></div>
             <div className="h-px w-6 bg-on-surface/20"></div>
             <div className="h-px w-6 bg-on-surface/20"></div>
